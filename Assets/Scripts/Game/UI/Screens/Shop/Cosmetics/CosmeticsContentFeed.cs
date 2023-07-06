@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static CosmeticsDataHandler;
 
-public class CosmeticsContentFeed : ContentFeed<CosmeticsContentFeedElement, CosmeticsContentFeedGroup.CosmeticsContentFeedGroupElement>
+public class CosmeticsContentFeed : ContentFeed<CosmeticsContentFeedElement, CosmeticsContentFeedGroup.Element>
 {
     public CosmeticsContentFeedElement[] GetElements() => FeedElements;
     public CosmeticsContentFeedElement GetElement(int groupId, int itemId)

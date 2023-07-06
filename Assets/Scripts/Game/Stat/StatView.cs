@@ -9,8 +9,10 @@ public class StatView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _money;
     [SerializeField] private TextMeshProUGUI _gps;
+    [SerializeField] private GameObject _prestigeLevelObj;
+    [SerializeField] private TextMeshProUGUI _prestigeLevel;
     [SerializeField] private TextMeshProUGUI _gpc;
-    public Action OnMoneyChanged;
+    
     private static Dictionary<long, string> NumberShortcuts = new Dictionary<long, string>()
     {
         [1000] = "K",
@@ -58,10 +60,9 @@ public class StatView : MonoBehaviour
         }
         return currency.ToString();
     }
-    public void SetMoneyView(int money)
+    public void SetMoneyView(long money)
     {
         _money.text = FromCurrencyToString(money);
-        OnMoneyChanged?.Invoke();
     }
     public void SetGPSView(int gps)
     {
@@ -71,6 +72,11 @@ public class StatView : MonoBehaviour
     {
         if(_gpc != null)
         _gpc.text = gpc.ToString();
+    }
+    public void SetPrestigeLevelView(int level)
+    {
+        _prestigeLevelObj.gameObject.SetActive(level != 0);
+        _prestigeLevel.text = level.ToString();
     }
     public void InsertProductionView(PlayerStatRequestHandler.PlayerStatResponse body)
     {

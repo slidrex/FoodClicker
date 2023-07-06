@@ -10,6 +10,7 @@ public class PlayerStatRequestHandler
         public int UserMoney { get; set; }
         public int Gps { get; set; }
         public int Gpc { get; set; }
+        public int PrestigeLevel { get; set; }
     }
     public PlayerStatResponse GetPlayerStats()
     {

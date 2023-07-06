@@ -8,6 +8,7 @@ public class GameConfiguration : MonoBehaviour
     private void Start()
     {
         var stats = GameRequestsCompositeRoot.Instance.PlayerStatRequestHandler.GetPlayerStats();
-        GameCompositeRoot.Instance.StatView.InsertProductionView(stats);
+        GameCompositeRoot.Instance.StatController.SetProductionStats(stats);
+        GameCompositeRoot.Instance.CosmeticsController.SetupSavedCosmetics();
     }
 }

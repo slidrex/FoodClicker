@@ -6,9 +6,11 @@ public class GameCompositeRoot : MonoBehaviour
 {
     public static GameCompositeRoot Instance { get; private set; }
     public CosmeticsController CosmeticsController;
-    public StatView StatView;
+    public AscensionController AscensionController;
+    public StatController StatController;
     private void Awake()
     {
+        StatController.Init();
         Instance = this;
     }
 }

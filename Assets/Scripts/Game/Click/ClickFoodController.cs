@@ -16,26 +16,20 @@ public class ClickFoodController : MonoBehaviour
     }
     private void Update()
     {
-        if(timeSinceCycle < 1.0f)
+        if (timeSinceCycle < 1.0f)
         {
             timeSinceCycle += Time.deltaTime;
         }
         else
         {
             var response = GameRequestsCompositeRoot.Instance.ShopRequestController.CompleteCycle();
-            UpdateMoneyView(response);
+            GameCompositeRoot.Instance.StatController.SetMoney(response.userMoney);
             timeSinceCycle = 0;
         }
     }
     private void OnClick()
     {
         var response = GameRequestsCompositeRoot.Instance.ShopRequestController.PerformClick();
-        UpdateMoneyView(response);
-
-
-    }
-    private void UpdateMoneyView(ShopRequestController.PlayerMoneyResponse moneyResponse)
-    {
-        GameCompositeRoot.Instance.StatView.SetMoneyView(moneyResponse.userMoney);
+        GameCompositeRoot.Instance.StatController.SetMoney(response.userMoney);
     }
 }

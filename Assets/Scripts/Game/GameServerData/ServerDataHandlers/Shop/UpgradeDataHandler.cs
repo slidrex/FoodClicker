@@ -28,9 +28,10 @@ public sealed class UpgradeDataHandler : ServerIDDataHandler<UpgradeFeedDataHand
         {
             var curTemplate = allModels[i];
             string description = curTemplate.BaseGpc == 0 ? $"+ {curTemplate.BaseGps} GPS" : $"+ {curTemplate.BaseGpc} GPC";
-            if (ownedModels.Any(x => x.Uid == curTemplate.Uid))
+            var item = ownedModels.Where(x => x.Uid == curTemplate.Uid).FirstOrDefault();
+            if (item != null)
             {
-                data[i] = new UpgradeFeedData(curTemplate.Name, curTemplate.Sprite, description, ownedModels[i].Level, ownedModels[i].NextLevelPrice, ownedModels[i].Uid);
+                data[i] = new UpgradeFeedData(curTemplate.Name, curTemplate.Sprite, description, item.Level, item.NextLevelPrice, item.Uid);
             }
             else data[i] = new UpgradeFeedData(curTemplate.Name, curTemplate.Sprite, description, -1, curTemplate.BasePrice, curTemplate.Uid);
             

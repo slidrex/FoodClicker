@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,11 +13,11 @@ public class AscentionScreenController : MenuScreenController
     private void OnEnable()
     {
         _ascentionSubmitButton.onClick.AddListener(OnAscentionButtonClicked);
-        GameCompositeRoot.Instance.StatView.OnMoneyChanged += UpdatePrestigeButtonInteractionStatus;
+        GameCompositeRoot.Instance.StatController.OnMoneyChanged += UpdatePrestigeButtonInteractionStatus;
     }
     private void OnDisable()
     {
-        GameCompositeRoot.Instance.StatView.OnMoneyChanged -= UpdatePrestigeButtonInteractionStatus;
+        GameCompositeRoot.Instance.StatController.OnMoneyChanged -= UpdatePrestigeButtonInteractionStatus;
         _ascentionSubmitButton.onClick.RemoveAllListeners();
     }
     protected override void OnScreenLoaded(ScreenManager.Screen screenSpefication)
@@ -30,15 +31,10 @@ public class AscentionScreenController : MenuScreenController
     }
     private void UpdatePrestigeButtonInteractionStatus()
     {
-        _ascentionSubmitButton.interactable = CurrencyController.IsAffordable(_ascentionPriceholder.text);
+        _ascentionSubmitButton.interactable = GameCompositeRoot.Instance.StatController.IsAffordable(_ascentionPriceholder.text);
     }
     private void OnAscentionButtonClicked()
     {
-        var resp = GameRequestsCompositeRoot.Instance.AscentionRequestHandler.DoPrestigeRequest();
-        if(!resp.Equals(default(PlayerStatRequestHandler.PlayerStatResponse)))
-        {
-            GameCompositeRoot.Instance.StatView.InsertProductionView(resp);
-            ScreenManager.Instance.LoadScreen(ScreenManager.Screen.MAIN_MENU);
-        }
+        GameCompositeRoot.Instance.AscensionController.DoPrestigeRequest();
     }
 }

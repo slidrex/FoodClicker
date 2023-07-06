@@ -1,22 +1,46 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static CosmeticsDataHandler;
+using static CosmeticsRequestController;
 
 public class CosmeticsScreenController : MenuScreenController
 {
-    private CosmeticsContentFeedGroup[] _cachedGroups;
+    [SerializeField] private CosmeticsContentFeedGroup[] _cachedGroups;
     [SerializeField] private CosmeticsContentFeed cosmeticsFeed;
+    private CosmeticsDataHandler _handler;
+    private int _currentGroupId;
+    public override void OnPlayerEnterGame() //Start
+    {
+        _handler = DatabaseCompositeRoot.Instance.ServerHandlerDatabase.CosmeticsDataHandler;
+        UpdateFeedScript();
+    }
+    private void OnEnable()
+    {
+        GameCompositeRoot.Instance.AscensionController.OnAscension += OnAscension;
+        GameCompositeRoot.Instance.StatController.OnMoneyChanged += OnMoneyChanged;
+    }
+    private void OnDisable()
+    {
+        GameCompositeRoot.Instance.AscensionController.OnAscension -= OnAscension;
+        GameCompositeRoot.Instance.StatController.OnMoneyChanged -= OnMoneyChanged;
+    }
+    private void OnMoneyChanged()
+    {
+        _handler.ActualizeGroupFeed(_currentGroupId, cosmeticsFeed, _cachedGroups);
+    }
+    private void OnAscension()
+    {
+        UpdateFeedScript();
+        _handler.ApplyAllDefaultCosmetics();
+    }
     protected override void OnScreenLoaded(ScreenManager.Screen screenSpefication)
     {
         if(screenSpefication == ScreenManager.Screen.COSMETICS_BACKGROUND)
         {
-            cosmeticsFeed.FillFeed(_cachedGroups[0].Items);
+            LoadConfig(0);
         }
         else if(screenSpefication == ScreenManager.Screen.COSMETICS_FOOD_IMAGE)
         {
-            cosmeticsFeed.FillFeed(_cachedGroups[1].Items);
+            LoadConfig(1);
         }
         var el = cosmeticsFeed.GetElements();
         for (int i = 0; i < el.Length; i++) el[i].OnWasClicked += OnFeedElementClicked;
@@ -26,28 +50,43 @@ public class CosmeticsScreenController : MenuScreenController
         var el = cosmeticsFeed.GetElements();
         for (int i = 0; i < el.Length; i++) el[i].OnWasClicked -= OnFeedElementClicked;
     }
-    public override void OnPlayerEnterGame()
-    {
-        UpdateFeed();
-    }
     private void OnFeedElementClicked(CosmeticsContentFeedElement element)
     {
-        var oldEquippedItemIndex = _cachedGroups[element.GroupId].GetEquippedItemIndex();
-        var request = new CosmeticsRequestController.EquipCosmeticsRequest(element.ItemId, element.GroupId);
+        int groupId = element.GroupId;
+        var elementStatus = element.Status;
+        int newItemIndex = element.ItemId;
+
+        if(elementStatus == CosmeticsContentFeedElement.ElementStatus.READY_TO_BUY) BuyItem(groupId, newItemIndex);
+        else if(elementStatus == CosmeticsContentFeedElement.ElementStatus.OWNED) EquipItem(groupId, newItemIndex);
+    }
+    private void EquipItem(int groupId, int newItemId)
+    {
+        var request = new EquipCosmeticsRequest(newItemId, groupId);
         var resp = GameRequestsCompositeRoot.Instance.CosmeticsRequestController.EquipCosmetics(request);
         if(resp != null)
         {
-            cosmeticsFeed.GetElement(element.GroupId, oldEquippedItemIndex).SetEquipStatus(false);
-            
-            element.SetEquipStatus(true);
-            DatabaseCompositeRoot.Instance.ServerHandlerDatabase.CosmeticsDataHandler.ApplyCosmetics(element.GroupId, element.ItemId);
-            UpdateFeed();
+            _handler.SetElementStatus(groupId, newItemId, CosmeticsContentFeedElement.ElementStatus.EQUIPPED, cosmeticsFeed, _cachedGroups);
         }
-
     }
-    private void UpdateFeed()
+    private void BuyItem(int groupId, int newItemId)
+    {
+        var request = new BuyCosmeticsRequest(newItemId, groupId);
+        var resp = GameRequestsCompositeRoot.Instance.CosmeticsRequestController.BuyCosmetics(request);
+        if (resp != null)
+        {
+            GameCompositeRoot.Instance.StatController.SetProductionStats(resp.Stats);
+            _handler.SetElementStatus(groupId, newItemId, CosmeticsContentFeedElement.ElementStatus.EQUIPPED, cosmeticsFeed, _cachedGroups);
+        }
+    }
+    private void UpdateFeedScript()
     {
         var response = GameRequestsCompositeRoot.Instance.CosmeticsRequestController.GetPlayerCosmetics();
-        _cachedGroups = DatabaseCompositeRoot.Instance.ServerHandlerDatabase.CosmeticsDataHandler.ModelToFeed(response);
+        _cachedGroups = _handler.ModelToFeed(response);
+    }
+    private void LoadConfig(int groupId)
+    {
+        cosmeticsFeed.FillFeed(_cachedGroups[groupId].Items);
+        _handler.ActualizeGroupFeed(groupId, cosmeticsFeed, _cachedGroups);
+        _currentGroupId = groupId;
     }
 }

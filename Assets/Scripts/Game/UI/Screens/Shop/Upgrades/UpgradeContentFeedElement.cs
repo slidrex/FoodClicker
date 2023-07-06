@@ -27,14 +27,14 @@ public class UpgradeContentFeedElement : ContentFeedElement<UpgradeFeedData>
     }
     private void OnEnable()
     {
-        GameCompositeRoot.Instance.StatView.OnMoneyChanged += UpdateAvailableness;
+        GameCompositeRoot.Instance.StatController.OnMoneyChanged += UpdateAvailableness;
     }
     private void OnDisable()
     {
-        GameCompositeRoot.Instance.StatView.OnMoneyChanged -= UpdateAvailableness;
+        GameCompositeRoot.Instance.StatController.OnMoneyChanged -= UpdateAvailableness;
     }
     public void UpdateAvailableness()
     {
-        _button.interactable = CurrencyController.IsAffordable(int.Parse(_price.text));
+        _button.interactable = GameCompositeRoot.Instance.StatController.IsAffordable(int.Parse(_price.text));
     }
 }

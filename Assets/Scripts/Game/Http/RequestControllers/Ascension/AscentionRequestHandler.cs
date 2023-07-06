@@ -7,6 +7,10 @@ using static ShopRequestController;
 
 public class AscentionRequestHandler
 {
+    public class PrestigeLevelResponse
+    {
+        public int PrestigeLevel { get; set; }
+    }
     public class AscentionPriceResponse
     {
         public long Price { get; set; }
@@ -24,5 +28,12 @@ public class AscentionRequestHandler
         req.SendWebRequest();
         while (!req.isDone) { }
         return JsonConvert.DeserializeObject<PlayerStatRequestHandler.PlayerStatResponse>(req.downloadHandler.text);
+    }
+    public PrestigeLevelResponse GetAscentionLevel()
+    {
+        var req = RestController.GetRequestMessage("http://localhost:8080/api/v0/game/ascention/get_prestige_level");
+        req.SendWebRequest();
+        while (!req.isDone) { }
+        return JsonConvert.DeserializeObject<PrestigeLevelResponse>(req.downloadHandler.text);
     }
 }

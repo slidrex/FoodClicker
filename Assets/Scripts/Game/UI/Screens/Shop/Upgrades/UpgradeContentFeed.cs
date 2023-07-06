@@ -72,7 +72,7 @@ public class UpgradeContentFeed : ContentFeed<UpgradeContentFeedElement, Upgrade
         if(resp != null)
         {
             element.InsertData(UpgradeDataHandler.ModelToData(resp.Model));
-            GameCompositeRoot.Instance.StatView.InsertProductionView(resp.Stats);
+            GameCompositeRoot.Instance.StatController.SetProductionStats(resp.Stats);
         }
     }
 }
