@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 public class AuthScreenController : MonoBehaviour
 {
     private AuthScreenView.Screen _currenctScreen;
-    private const string FOOD_ID_URI = "http://localhost:8081/api/v0/foodid/";
+    private const string FOOD_ID_URI = "http://localhost:8080/api/v0/foodid/";
     [SerializeField] private AuthScreenView _authScreenView;
     private string _specifiedString;
     private void OnEnable()
@@ -30,7 +30,7 @@ public class AuthScreenController : MonoBehaviour
         var codeRequest = new ConfirmationCodeRequest(value);
         string codeRequestJSON = JsonConvert.SerializeObject(codeRequest);
         _specifiedString = value;
-        var request = RestController.PostRequestMessage($"{FOOD_ID_URI}send_confirmation_code", codeRequestJSON);
+        var request = RestController.PostRequestMessage($"{FOOD_ID_URI}email/send_confirmation_code", codeRequestJSON);
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.ConnectionError) yield return null;
@@ -50,7 +50,7 @@ public class AuthScreenController : MonoBehaviour
             var loginRequest = new LoginRequest(_specifiedString, code);
             string codeRequestJSON = JsonConvert.SerializeObject(loginRequest);
 
-            var request = RestController.PostRequestMessage($"{FOOD_ID_URI}email/login", codeRequestJSON);
+            var request = RestController.PostRequestMessage($"{FOOD_ID_URI}auth/authenticate", codeRequestJSON);
             yield return request.SendWebRequest();
 
             if (request.responseCode == 200)
