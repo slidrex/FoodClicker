@@ -22,14 +22,14 @@ public class ClickFoodController : MonoBehaviour
         }
         else
         {
-            var response = GameRequestsCompositeRoot.Instance.ShopRequestController.CompleteCycle();
+            var response = RequestsCompositeRoot.Instance.ShopRequestController.CompleteCycle();
             GameCompositeRoot.Instance.StatController.SetMoney(response.userMoney);
             timeSinceCycle = 0;
         }
     }
     private void OnClick()
     {
-        var response = GameRequestsCompositeRoot.Instance.ShopRequestController.PerformClick();
+        var response = RequestsCompositeRoot.Instance.ShopRequestController.PerformClick();
         GameCompositeRoot.Instance.StatController.SetMoney(response.userMoney);
     }
 }

@@ -1,10 +1,6 @@
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
-using Unity.Android.Gradle;
-using UnityEditor.PackageManager;
-using UnityEngine;
 using static PlayerStatRequestHandler;
 
 public class CosmeticsRequestController
@@ -42,7 +38,7 @@ public class CosmeticsRequestController
     }
     public List<List<CosmeticsGroupElement>> GetAllCosmeticsTemplates()
     {
-        var req = RestController.GetRequestMessage("http://localhost:8080/api/v0/game/shop/cosmetics/get_all_items");
+        var req = RestController.GetRequestMessage($"{RequestsCompositeRoot.BASE_URL}game/shop/cosmetics/get_all_items");
         req.SendWebRequest();
         while (!req.isDone) { }
 
@@ -50,7 +46,7 @@ public class CosmeticsRequestController
     }
     public PlayerCosmeticsGroupModel[] GetPlayerCosmetics()
     {
-        var req = RestController.GetRequestMessage("http://localhost:8080/api/v0/game/shop/cosmetics/get_all_player_cosmetics");
+        var req = RestController.GetRequestMessage($"{RequestsCompositeRoot.BASE_URL}game/shop/cosmetics/get_all_player_cosmetics");
         req.SendWebRequest();
         while (!req.isDone) { }
 
@@ -58,7 +54,7 @@ public class CosmeticsRequestController
     }
     public PlayerCosmeticsModel[] GetPlayerEquippedCosmetics()
     {
-        var req = RestController.GetRequestMessage("http://localhost:8080/api/v0/game/shop/cosmetics/get_player_equipped_cosmetics");
+        var req = RestController.GetRequestMessage($"{RequestsCompositeRoot.BASE_URL}game/shop/cosmetics/get_player_equipped_cosmetics");
         req.SendWebRequest();
         while (!req.isDone) { }
 

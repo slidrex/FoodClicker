@@ -70,7 +70,7 @@ public sealed class CosmeticsDataHandler : ScriptableObject
     public void Configure()
     {
         initialized = true;
-        List<List<CosmeticsGroupElement>> baseGroupElements = GameRequestsCompositeRoot.Instance.CosmeticsRequestController.GetAllCosmeticsTemplates();
+        List<List<CosmeticsGroupElement>> baseGroupElements = RequestsCompositeRoot.Instance.CosmeticsRequestController.GetAllCosmeticsTemplates();
 
         for (int groupId = 0; groupId < baseGroupElements.Count; groupId++)
         {

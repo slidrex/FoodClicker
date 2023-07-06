@@ -8,7 +8,7 @@ public class MyProfileScreen : MenuScreenController
     [SerializeField] private ProfileObject _profileObject;
     protected override void OnScreenLoaded(ScreenManager.Screen screenSpefication)
     {
-        var response = GameRequestsCompositeRoot.Instance.PlayerProfileRequestHandler.GetMyProfile();
+        var response = RequestsCompositeRoot.Instance.PlayerProfileRequestHandler.GetMyProfile();
         _profileObject.InsertData(response);
     }
 }

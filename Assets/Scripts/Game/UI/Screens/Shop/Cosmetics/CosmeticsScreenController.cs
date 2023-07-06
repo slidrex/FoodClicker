@@ -62,7 +62,7 @@ public class CosmeticsScreenController : MenuScreenController
     private void EquipItem(int groupId, int newItemId)
     {
         var request = new EquipCosmeticsRequest(newItemId, groupId);
-        var resp = GameRequestsCompositeRoot.Instance.CosmeticsRequestController.EquipCosmetics(request);
+        var resp = RequestsCompositeRoot.Instance.CosmeticsRequestController.EquipCosmetics(request);
         if(resp != null)
         {
             _handler.SetElementStatus(groupId, newItemId, CosmeticsContentFeedElement.ElementStatus.EQUIPPED, cosmeticsFeed, _cachedGroups);
@@ -71,7 +71,7 @@ public class CosmeticsScreenController : MenuScreenController
     private void BuyItem(int groupId, int newItemId)
     {
         var request = new BuyCosmeticsRequest(newItemId, groupId);
-        var resp = GameRequestsCompositeRoot.Instance.CosmeticsRequestController.BuyCosmetics(request);
+        var resp = RequestsCompositeRoot.Instance.CosmeticsRequestController.BuyCosmetics(request);
         if (resp != null)
         {
             GameCompositeRoot.Instance.StatController.SetProductionStats(resp.Stats);
@@ -80,7 +80,7 @@ public class CosmeticsScreenController : MenuScreenController
     }
     private void UpdateFeedScript()
     {
-        var response = GameRequestsCompositeRoot.Instance.CosmeticsRequestController.GetPlayerCosmetics();
+        var response = RequestsCompositeRoot.Instance.CosmeticsRequestController.GetPlayerCosmetics();
         _cachedGroups = _handler.ModelToFeed(response);
     }
     private void LoadConfig(int groupId)

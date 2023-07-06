@@ -9,7 +9,7 @@ public sealed class UpgradeDataHandler : ServerIDDataHandler<UpgradeFeedDataHand
 {
     public void ConfigureDatabase()
     {
-        var templates = GameRequestsCompositeRoot.Instance.ShopRequestController.GetUpgradeTemplates();
+        var templates = RequestsCompositeRoot.Instance.ShopRequestController.GetUpgradeTemplates();
         int i = 0;
 
         foreach(var handler in Handlers)

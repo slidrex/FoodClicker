@@ -68,7 +68,7 @@ public class UpgradeContentFeed : ContentFeed<UpgradeContentFeedElement, Upgrade
     }
     private void OnFeedClicked(UpgradeContentFeedElement element)
     {
-        var resp = GameRequestsCompositeRoot.Instance.ShopRequestController.RequestUpgrade(element.Uid);
+        var resp = RequestsCompositeRoot.Instance.ShopRequestController.RequestUpgrade(element.Uid);
         if(resp != null)
         {
             element.InsertData(UpgradeDataHandler.ModelToData(resp.Model));

@@ -15,7 +15,7 @@ public class LeadersRequestController
     }
     public List<MoneyLeaderModel> GetGoldLeaders()
     {
-        var req = RestController.GetRequestMessage("http://localhost:8080/api/v0/game/social/leader/get_gold_leaders");
+        var req = RestController.GetRequestMessage($"{RequestsCompositeRoot.BASE_URL}game/social/leader/get_gold_leaders");
         req.SendWebRequest();
         while (!req.isDone) { }
         if (req.responseCode != 200) return null;

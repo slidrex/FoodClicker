@@ -19,7 +19,7 @@ public class CosmeticsController : MonoBehaviour
     [SerializeField] private Image _foodImage;
     public void SetupSavedCosmetics()
     {
-        PlayerCosmeticsModel[] equippedCosmetics = GameRequestsCompositeRoot.Instance.CosmeticsRequestController.GetPlayerEquippedCosmetics();
+        PlayerCosmeticsModel[] equippedCosmetics = RequestsCompositeRoot.Instance.CosmeticsRequestController.GetPlayerEquippedCosmetics();
         DatabaseCompositeRoot.Instance.ServerHandlerDatabase.CosmeticsDataHandler.ApplyAllDefaultCosmetics();
         foreach (var equippedCosm in equippedCosmetics) DatabaseCompositeRoot.Instance.ServerHandlerDatabase.CosmeticsDataHandler.ApplyCosmetics(equippedCosm.GroupId, equippedCosm.ItemId);
     }

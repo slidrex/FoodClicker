@@ -8,7 +8,7 @@ public class AscensionController : MonoBehaviour
     public Action OnAscension;
     public void DoPrestigeRequest()
     {
-        var resp = GameRequestsCompositeRoot.Instance.AscentionRequestHandler.DoPrestigeRequest();
+        var resp = RequestsCompositeRoot.Instance.AscentionRequestHandler.DoPrestigeRequest();
         if (!resp.Equals(default(PlayerStatRequestHandler.PlayerStatResponse)))
         {
             GameCompositeRoot.Instance.StatController.SetProductionStats(resp);

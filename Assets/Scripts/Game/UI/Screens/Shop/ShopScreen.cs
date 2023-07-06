@@ -11,7 +11,7 @@ public class ShopScreen : MenuScreenController
         switch (screenSpefication)
         {
             case ScreenManager.Screen.SHOP_UPGRADES:
-                var models = GameRequestsCompositeRoot.Instance.ShopRequestController.GetPlayerProduction();
+                var models = RequestsCompositeRoot.Instance.ShopRequestController.GetPlayerProduction();
                 _upgradesScreen.FillFeed(UpgradeDataHandler.ModelToData(models));
                 _upgradesScreen.gameObject.SetActive(true);
                 return;

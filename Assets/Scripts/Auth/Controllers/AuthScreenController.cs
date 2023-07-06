@@ -12,7 +12,6 @@ using UnityEngine.SceneManagement;
 public class AuthScreenController : MonoBehaviour
 {
     private AuthScreenView.Screen _currenctScreen;
-    private const string FOOD_ID_URI = "http://localhost:8080/api/v0/foodid/";
     [SerializeField] private AuthScreenView _authScreenView;
     private string _specifiedString;
     private void OnEnable()
@@ -30,10 +29,11 @@ public class AuthScreenController : MonoBehaviour
         var codeRequest = new ConfirmationCodeRequest(value);
         string codeRequestJSON = JsonConvert.SerializeObject(codeRequest);
         _specifiedString = value;
-        var request = RestController.PostRequestMessage($"{FOOD_ID_URI}email/send_confirmation_code", codeRequestJSON);
+        var request = RestController.PostRequestMessage($"{RequestsCompositeRoot.BASE_URL}foodid/email/send_confirmation_code", codeRequestJSON);
         yield return request.SendWebRequest();
-
+        
         if (request.result == UnityWebRequest.Result.ConnectionError) yield return null;
+
         var httpResponse = JsonConvert.DeserializeObject<HttpStatusResponse>(request.downloadHandler.text);
         if (request.responseCode == 200 )
         {
@@ -50,14 +50,15 @@ public class AuthScreenController : MonoBehaviour
             var loginRequest = new LoginRequest(_specifiedString, code);
             string codeRequestJSON = JsonConvert.SerializeObject(loginRequest);
 
-            var request = RestController.PostRequestMessage($"{FOOD_ID_URI}auth/authenticate", codeRequestJSON);
+            var request = RestController.PostRequestMessage($"{RequestsCompositeRoot.BASE_URL}foodid/auth/authenticate", codeRequestJSON);
             yield return request.SendWebRequest();
 
             if (request.responseCode == 200)
             {
                 var tokenResponse = JsonConvert.DeserializeObject<AuthTokenResponse>(request.downloadHandler.text);
                 
-                ClientManager.SetAuthenticationToken(tokenResponse.AccessToken);
+                ClientManager.SetAuthenticationToken(tokenResponse.accessToken);
+
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else

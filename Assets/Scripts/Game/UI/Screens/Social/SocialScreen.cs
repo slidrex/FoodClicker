@@ -16,7 +16,7 @@ public class SocialScreen : MenuScreenController
                 _friendList.gameObject.SetActive(true); return;
             case ScreenManager.Screen.SOCIAL_TOP:
                 _leaderFeed.gameObject.SetActive(true);
-                var data = ModelToData(GameRequestsCompositeRoot.Instance.LeadersRequestController.GetGoldLeaders());
+                var data = ModelToData(RequestsCompositeRoot.Instance.LeadersRequestController.GetGoldLeaders());
                 _leaderFeed.FillFeed(data);
                 return;
             case ScreenManager.Screen.SOCIAL_FRIENDS_REQUESTS:

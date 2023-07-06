@@ -7,7 +7,7 @@ public class GameConfiguration : MonoBehaviour
 {
     private void Start()
     {
-        var stats = GameRequestsCompositeRoot.Instance.PlayerStatRequestHandler.GetPlayerStats();
+        var stats = RequestsCompositeRoot.Instance.PlayerStatRequestHandler.GetPlayerStats();
         GameCompositeRoot.Instance.StatController.SetProductionStats(stats);
         GameCompositeRoot.Instance.CosmeticsController.SetupSavedCosmetics();
     }

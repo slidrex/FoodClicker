@@ -24,7 +24,7 @@ public class AscentionScreenController : MenuScreenController
     {
         if(screenSpefication == ScreenManager.Screen.ASCENTION_MENU)
         {
-            var ascentionPrice = GameRequestsCompositeRoot.Instance.AscentionRequestHandler.GetAscentionPrice();
+            var ascentionPrice = RequestsCompositeRoot.Instance.AscentionRequestHandler.GetAscentionPrice();
             _ascentionPriceholder.text = StatView.FromCurrencyToString(ascentionPrice.Price);
             UpdatePrestigeButtonInteractionStatus();
         }

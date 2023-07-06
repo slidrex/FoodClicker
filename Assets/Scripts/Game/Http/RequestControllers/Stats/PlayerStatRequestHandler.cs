@@ -14,7 +14,7 @@ public class PlayerStatRequestHandler
     }
     public PlayerStatResponse GetPlayerStats()
     {
-        var req = RestController.GetRequestMessage("http://localhost:8080/api/v0/game/shop/get_player_stats");
+        var req = RestController.GetRequestMessage($"{RequestsCompositeRoot.BASE_URL}game/shop/get_player_stats");
         req.SendWebRequest();
         while (!req.isDone) { }
 

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public struct AuthTokenResponse
 {
-    public string AccessToken { get; set; }
+    public string accessToken { get; set; }
 }

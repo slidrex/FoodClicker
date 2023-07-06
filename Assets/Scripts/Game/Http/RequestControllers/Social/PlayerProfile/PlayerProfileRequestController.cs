@@ -15,7 +15,7 @@ public class PlayerProfileRequestController
     }
     public PlayerProfileModel GetMyProfile()
     {
-        var req = RestController.GetRequestMessage("http://localhost:8080/api/v0/game/social/profile/get_my_profile");
+        var req = RestController.GetRequestMessage($"{RequestsCompositeRoot.BASE_URL}game/social/profile/get_my_profile");
         req.SendWebRequest();
         while (!req.isDone) { }
         if (req.responseCode != 200) return null;

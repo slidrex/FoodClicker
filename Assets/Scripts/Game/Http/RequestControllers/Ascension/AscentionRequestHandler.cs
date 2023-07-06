@@ -17,21 +17,21 @@ public class AscentionRequestHandler
     }
     public AscentionPriceResponse GetAscentionPrice()
     {
-        var req = RestController.GetRequestMessage("http://localhost:8080/api/v0/game/ascention/get_ascention_price");
+        var req = RestController.GetRequestMessage($"{RequestsCompositeRoot.BASE_URL}game/ascention/get_ascention_price");
         req.SendWebRequest();
         while (!req.isDone) { }
         return JsonConvert.DeserializeObject<AscentionPriceResponse>(req.downloadHandler.text);
     }
     public PlayerStatRequestHandler.PlayerStatResponse DoPrestigeRequest()
     {
-        var req = RestController.PatchRequestMessage("http://localhost:8080/api/v0/game/ascention/do_prestige");
+        var req = RestController.PatchRequestMessage($"{RequestsCompositeRoot.BASE_URL}game/ascention/do_prestige");
         req.SendWebRequest();
         while (!req.isDone) { }
         return JsonConvert.DeserializeObject<PlayerStatRequestHandler.PlayerStatResponse>(req.downloadHandler.text);
     }
     public PrestigeLevelResponse GetAscentionLevel()
     {
-        var req = RestController.GetRequestMessage("http://localhost:8080/api/v0/game/ascention/get_prestige_level");
+        var req = RestController.GetRequestMessage($"{RequestsCompositeRoot.BASE_URL}game/ascention/get_prestige_level");
         req.SendWebRequest();
         while (!req.isDone) { }
         return JsonConvert.DeserializeObject<PrestigeLevelResponse>(req.downloadHandler.text);
