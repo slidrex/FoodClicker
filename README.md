@@ -1,3 +1,6 @@
+#FoodClicker
+Client Side
+=
 FoodClicker is a new perspective on the clicker genre.
 It is a server based game that is designed to be secure in terms
 of game progress. Lots of cosmetics and prestige dependent content.
