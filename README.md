@@ -5,9 +5,6 @@ It is a server based game that is designed to be secure in terms
 of game progress. Lots of cosmetics and prestige dependent content.
 </h>
 
-v1.0 video test
-https://youtu.be/jiAbhZji4Fw
-
 Serverside Feature
 =
 There is a Leaderboard mechanic that will make you choose between two things:
