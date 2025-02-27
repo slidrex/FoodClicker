@@ -101,15 +101,6 @@ Frameworks
 Authentication
 - Json Web Token
 
-Server is monolothic but as the project grows it will likely become microservice so
-this list will include Apache Kafka and Spring Cloud with Netflix Eureka.
-
-Database Schema
-=
-![Untitled Diagram drawio](https://github.com/slidrex/FoodClickerServer/assets/108924768/599eac5d-749e-410d-ab38-8ff15fb2f936)
-
-
-
 Available Endpoints
 =
 ![251650771-af3a9d8f-9199-42d0-9860-fcc855107c57](https://github.com/user-attachments/assets/b9d203ce-900b-4719-99fb-3fae0e9d5382)
