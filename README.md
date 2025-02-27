@@ -112,5 +112,6 @@ Database Schema
 
 Available Endpoints
 =
-![image](https://github.com/slidrex/FoodClickerServer/assets/108924768/af3a9d8f-9199-42d0-9860-fcc855107c57)
+![251650771-af3a9d8f-9199-42d0-9860-fcc855107c57](https://github.com/user-attachments/assets/b9d203ce-900b-4719-99fb-3fae0e9d5382)
+
 
