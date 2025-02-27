@@ -35,6 +35,10 @@ Food ID
 Authentication system. You enter your e-mail then confirm it with the code
 and then you can proceed. System doesn't use password
 
+![Screenshot 2025-02-27 183418](https://github.com/user-attachments/assets/529719dd-85c8-4718-8415-79648ae26df9)
+![Screenshot 2025-02-27 183431](https://github.com/user-attachments/assets/fc8b3983-48fa-4d00-86a1-3b72c21b99d9)
+
+
 In-Game screen
 =
 
@@ -46,6 +50,7 @@ Ascending (Prestige)
 As you play enough you can reset your progress and upgrade your prestige level.
 You prestige level will show in leaderboard and in your profile.
 This also allows you to buy prestige required items.
+![Screenshot 2025-02-27 183959](https://github.com/user-attachments/assets/c5082e67-bdda-4d39-8083-a268f6a3987c)
 
 
 Shop
