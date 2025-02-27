@@ -1,6 +1,5 @@
-#FoodClicker
-Client Side
-=
+# FoodClickerServer
+<h>
 FoodClicker is a new perspective on the clicker genre.
 It is a server based game that is designed to be secure in terms
 of game progress. Lots of cosmetics and prestige dependent content.
@@ -86,3 +85,35 @@ Also, you can increase your prestige level and it will be shown to others
 Your Profile
 =
 ![Screenshot_346](https://github.com/slidrex/FoodClickerServer/assets/108924768/633d63b3-3369-4add-bf80-2160d1e7a248)
+
+Server features:
+Used Tools (Server only)
+=
+Languages
+- Java 17 (Gradle)
+- (Unity C# for frontent)
+
+Databases
+- MySQL
+- MongoDB
+- Redis
+
+Frameworks
+- Spring (Boot, Data, MVC, Security)  
+
+Authentication
+- Json Web Token
+
+Server is monolothic but as the project grows it will likely become microservice so
+this list will include Apache Kafka and Spring Cloud with Netflix Eureka.
+
+Database Schema
+=
+![Untitled Diagram drawio](https://github.com/slidrex/FoodClickerServer/assets/108924768/599eac5d-749e-410d-ab38-8ff15fb2f936)
+
+
+
+Available Endpoints
+=
+![image](https://github.com/slidrex/FoodClickerServer/assets/108924768/af3a9d8f-9199-42d0-9860-fcc855107c57)
+
